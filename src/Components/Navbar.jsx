@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useContext, useEffect } from "react";
 import { Link } from 'react-router-dom'
-
+import { DataUsers } from "../Context/DataUsers";
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Navbar = () => {
+  const { theme, changeTheme } = useContext(DataUsers);
+  useEffect(() => {
+    console.log(theme);
+  }, [theme]);
 
   return (
     <nav>
-      {/* Aqui deberan agregar los links correspondientes a las rutas definidas */}
+      {/* FALTAN LOS STYLES Aqui deberan agregar los links correspondientes a las rutas definidas */}
+        
         <ul>
           <li>
             <Link to="/">Home</Link>
@@ -20,7 +25,7 @@ const Navbar = () => {
           </li>
         </ul>
       {/* Deberan implementar ademas la lógica para cambiar de Theme con el button */}
-      <button>Change theme</button>
+      <button onClick={() => changeTheme()}>Change theme</button>
     </nav>
   )
 }

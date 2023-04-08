@@ -1,25 +1,56 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { DataUsers } from "../Context/DataUsers";
 
 
 const Card = ({ name, username, id }) => {
+  const { theme } = useContext(DataUsers);
 
+  const [fav, setFav] = React.useState(false);
   const addFav = ()=>{
     // Aqui iria la logica para agregar la Card en el localStorage
+    const favs = JSON.parse(localStorage.getItem("favs")) || [];
+    const newFavs = [...favs, { name, username, id }];
+    localStorage.setItem("favs", JSON.stringify(newFavs));
+    setFav(true);
   }
+  const removeFav = () => {
+    const favs = JSON.parse(localStorage.getItem("favs")) || [];
+    console.log(favs);
+    const newFavs = favs.filter((fav) => fav.id !== id);
+    console.log(newFavs);
+    localStorage.setItem("favs", JSON.stringify(newFavs));
+    console.log(localStorage.getItem("favs"));
+    setFav(false);
+  };
+  useEffect(() => {
+    const favs = JSON.parse(localStorage.getItem("favs")) || [];
+    const fav = favs.some((fav) => fav.id === id);
+    setFav(fav);
+  }, [id]);
 
   return (
-    <div className="card">
-        {/* En cada card deberan mostrar en name - username y el id */}
-        <h2>{id}</h2>
-        <h2>{name}</h2>
-        <h2>{username}</h2>
-
-        {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
-
-        {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-        <button onClick={addFav} className="favButton">Add fav</button>
+    <div
+      style={{ background: theme.background, color: theme.color }}
+      className="card"
+    >
+        <Link to={`/dentist/${id}`}>
+        <h3 style={{ background: theme.background, color: theme.color }}>
+          {name}{" "}
+        </h3>
+        <p style={{ background: theme.background, color: theme.color }}>
+          {username}
+        </p>
+        <p style={{ background: theme.background, color: theme.color }}>{id}</p>
+      </Link>
+      {fav ? (
+        <button onClick={removeFav}>Remove fav</button>
+      ) : (
+        <button onClick={addFav}>Add fav</button>
+      )}
     </div>
   );
 };
 
 export default Card;
+

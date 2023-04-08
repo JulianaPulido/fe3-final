@@ -15,10 +15,40 @@ const Form = () => {
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formValidation()) {
+      alert(`Gracias ${name}, Revisa tu correo ${email}`);
+    } else {
+      alert("Por favor, asegurese que su información sea la correcta");
+    }
+  };
+  const nameValidation = () => {
+    if (name.length > 6) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const emailValidation = () => {
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (regex.test(email)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const formValidation = () => {
+    if (nameValidation() && emailValidation()) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name</label>
           <input
@@ -37,6 +67,7 @@ const Form = () => {
             onChange={(e) => handleChangeEmail(e)}
           />
         </div>
+        <button type="submit">Send</button>
       </form>
     </div>
   );

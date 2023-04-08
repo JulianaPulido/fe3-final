@@ -1,16 +1,24 @@
-
+import { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
-import Router from "./Routes/Router";
+import { DataUsersProvider } from "./Context/DataUsers";
+
 
 function App() {
-
+  useEffect(() => {
+    console.log("renderizando contacto");
+  }, []);
   return (
-    <div className="App">
-      <Navbar />
-      <Router />
-      <Footer />
-    </div>
+    <DataUsersProvider>
+      <div className="App">
+        <Navbar />
+
+        <Outlet />
+
+        <Footer />
+      </div>
+    </DataUsersProvider>
   );
 }
 

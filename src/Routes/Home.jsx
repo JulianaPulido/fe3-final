@@ -1,46 +1,29 @@
-import { React, useEffect, useState } from 'react'
-import Card from '../Components/Card'
+import React, { useContext, useEffect } from "react";
+import Card from "../Components/Card";
+import { DataUsers } from "../Context/DataUsers";
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Home = () => {
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [cards, setCards] = useState(null);
-
+  const { users, theme } = useContext(DataUsers);
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        setCards(data);
-        setIsLoading(false);
-      })
-      .catch(() => console.log("Algo falló"));
+    console.log("renderizando home");
   }, []);
-
-  if (isLoading) {
-    return (
-      <div className="App">
-        <h1>Cargando...</h1>
-      </div>
-    );
-  }
+  useEffect(() => {
+    console.log("renderizando home con users");
+    console.log(users);
+  }, [users]);
 
   return (
-    <main className="" >
+    <main style={{ background: theme.background, color: theme.color }}>
       <h1>Home</h1>
-      <div className='card-grid'>
-        {/* Aqui deberias renderizar las cards */}
-        {cards.map(card => {
-          return(
-            <Card name={card.name} username={card.username} id={card.id} />
-          )
-        })}
-        
+      <div className="card-grid">
+        {users.map((user) => (
+          <Card key={user.id} {...user} />
+        ))}
       </div>
     </main>
-  )
-}
+  );
+};
 
 export default Home
