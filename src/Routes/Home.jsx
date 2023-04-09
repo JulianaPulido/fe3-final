@@ -10,7 +10,7 @@ const Home = () => {
     console.log("renderizando home");
   }, []);
   useEffect(() => {
-    console.log("renderizando home con users");
+    console.log("render home with users");
     console.log(users);
   }, [users]);
 
@@ -26,4 +26,4 @@ const Home = () => {
   );
 };
 
-export default Home
+export default Home;

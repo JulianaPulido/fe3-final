@@ -20,7 +20,7 @@ const Form = () => {
     if (formValidation()) {
       alert(`Gracias ${name}, Revisa tu correo ${email}`);
     } else {
-      alert("Por favor, asegurese que su información sea la correcta");
+      alert("Por favor, asegurese que su información sea correcta");
     }
   };
   const nameValidation = () => {
