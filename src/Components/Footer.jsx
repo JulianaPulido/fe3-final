@@ -10,7 +10,7 @@ const Footer = () => {
       </p>
       <img
         style={{ background: theme.background, color: theme.color }}
-        src="./img/DH.png"
+        src="./images/DH.png"
         alt="DH-logo"
       />
     </footer>

@@ -10,24 +10,15 @@ const Navbar = () => {
   }, [theme]);
 
   return (
-    <nav>
+    <nav style={{ background: theme.background, color: theme.color, textAlign: "right" }}>
+      <Link style={{ background: theme.background, color: theme.color }} to="/home">Home</Link>
+      <Link style={{ background: theme.background, color: theme.color }} to="/contacto">Contacto</Link>
+      <Link style={{ background: theme.background, color: theme.color }} to="/favs">Destacados</Link>
       {/* FALTAN LOS STYLES Aqui deberan agregar los links correspondientes a las rutas definidas */}
-        
-        <ul>
-          <li>
-            <Link to="/home">Home</Link>
-          </li>
-          <li>
-            <Link to="/contacto">Contacto</Link>
-          </li>
-          <li>
-            <Link to="/favs">Destacados</Link>
-          </li>
-        </ul>
       {/* Deberan implementar ademas la lógica para cambiar de Theme con el button */}
       <button onClick={() => changeTheme()}>Change theme</button>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

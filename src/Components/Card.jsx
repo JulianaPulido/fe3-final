@@ -35,18 +35,19 @@ const Card = ({ name, username, id }) => {
       className="card"
     >
         <Link to={`/dentist/${id}`}>
-        <h3 style={{ background: theme.background, color: theme.color }}>
+        <img src={require('../images/doctor.jpg')} alt="" width="100%"/>
+        <h3 style={{ background: theme.background, color: theme.color, textAlign: "center" }}>
           {name}{" "}
         </h3>
-        <p style={{ background: theme.background, color: theme.color }}>
+        <p style={{ background: theme.background, color: theme.color, textAlign: "center" }}>
           {username}
         </p>
-        <p style={{ background: theme.background, color: theme.color }}>{id}</p>
+        <p style={{ background: theme.background, color: theme.color, textAlign: "center" }}>{id}</p>
       </Link>
       {fav ? (
-        <button onClick={removeFav}>Remove fav</button>
+        <button className="favButton" onClick={removeFav}>Remove fav</button>
       ) : (
-        <button onClick={addFav}>Add fav</button>
+        <button className="favButton" onClick={addFav}>Add fav</button>
       )}
     </div>
   );
